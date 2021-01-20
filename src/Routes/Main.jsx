@@ -5,6 +5,7 @@ import SignUp from "../Pages/SignUp";
 import Home from "../Pages/Home";
 import ParentDashboard from "../Pages/ParentDashboard";
 import { AuthProvider } from "../context/AuthContext";
+import SurveyForm from "../Components/SurveyForm";
 
 const Main = () => {
   return (
@@ -22,6 +23,9 @@ const Main = () => {
           </Route>
           <Route path="/dash">
             <ParentDashboard />
+          </Route>
+          <Route path="/survey">
+            <SurveyForm />
           </Route>
           <Route path="/">
             <Home />
