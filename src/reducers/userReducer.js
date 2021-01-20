@@ -12,15 +12,14 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 isAuthnticated: true,
-                userId: action.payload.uid,
+                userId: action.payload.uid
             };
         case 'LOGOUT':
             Cookies.remove('uid');
             return {
                 ...state,
                 isAuthnticated: false,
-                userId: null,
-                token: null
+                userId: null
             };
         default:
             return state;
