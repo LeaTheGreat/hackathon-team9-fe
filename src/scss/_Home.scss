@@ -1,0 +1,148 @@
+// Home.jsx
+
+.hero {
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #172a74, #21a9af);
+  &__img {
+    display: flex;
+    width: 55rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow-dreamy);
+    margin: 0 auto 2rem auto;
+    @media only screen and (max-width: $bp-large) {
+      width: 35rem;
+    }
+    @media only screen and (max-width: $bp-medium) {
+      width: 25rem;
+    }
+  }
+}
+
+.nav {
+  padding-top: 0.5rem;
+  height: 3rem;
+  margin: 0 auto 1.25rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 5.35rem);
+  @media only screen and (max-width: $bp-medium) {
+    width: calc(100% - 1rem);
+  }
+  &__logo {
+    font-size: 1.25rem;
+    color: #fff;
+  }
+  &__login {
+    border: none;
+    outline: none;
+    font-weight: 600;
+    background: transparent;
+    color: rgb(216, 216, 216);
+    padding: 0 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      color: red;
+    }
+  }
+  &__signup {
+    padding: 0.5rem;
+    border-radius: 100px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background: rgba(0, 145, 198, 0.625);
+    }
+  }
+}
+
+.test {
+  max-width: 30rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  @media screen and (max-width: $bp-medium) {
+    margin-bottom: 1rem;
+  }
+  &__heading {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+    @media screen and (max-width: $bp-medium) {
+      font-size: 1.75rem;
+    }
+  }
+  &__description {
+    line-height: 1.75rem;
+    color: #7d8285;
+    margin-bottom: 1rem;
+  }
+  &__button {
+    padding: 15px 28px;
+    background-color: #007bff;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      background-color: #005fc4;
+    }
+  }
+}
+
+// Article section
+.articles {
+  display: grid;
+  width: fit-content;
+  margin: 0 auto 2rem auto;
+  overflow: hidden;
+  grid-template-columns: repeat(3, min-content);
+  gap: 2rem;
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+  }
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 20rem;
+  @media only screen and (max-width: $bp-large) {
+    width: 15rem;
+  }
+  &__img {
+    max-width: 20rem;
+    margin-bottom: 1rem;
+    @media only screen and (max-width: $bp-large) {
+      width: 15rem;
+    }
+  }
+  &__title {
+    margin-bottom: 1rem;
+  }
+  &__description {
+    color: #7d8285;
+    margin-bottom: 1rem;
+  }
+  &__btn {
+    font-size: 1.25rem;
+    color: #4f86c3;
+    transition: all 0.3s;
+    &:hover {
+      color: #406a9b;
+    }
+  }
+}
