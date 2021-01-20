@@ -42,6 +42,7 @@ export default function FormControlLabelPlacement() {
           Does your child look at you when you call his name?
         </FormLabel>
         <RadioGroup
+          inputRef={register({ required: true })}
           row
           aria-label="position"
           className={classes.formGroup}
@@ -49,6 +50,7 @@ export default function FormControlLabelPlacement() {
           defaultValue="top"
         >
           <FormControlLabel
+            inputRef={register({ required: true })}
             value="1"
             control={<Radio inputRef={register({ required: true })} color="primary" />}
             label="Always"
