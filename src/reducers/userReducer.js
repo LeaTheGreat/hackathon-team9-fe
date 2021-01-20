@@ -2,7 +2,8 @@ import Cookies from 'js-cookie'
 
 export const initialState = {
     isAuthnticated: false,
-    userId: Cookies.get('id') || null
+    userId: Cookies.get('id') || null,
+    role : null
 };
 
 export const userReducer = (state, action) => {
@@ -12,14 +13,16 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 isAuthnticated: true,
-                userId: action.payload.id
+                userId: action.payload.id,
+                role: action.payload.role
             };
         case 'LOGOUT':
             Cookies.remove('id');
             return {
                 ...state,
                 isAuthnticated: false,
-                userId: null
+                userId: null,
+                role: null
             };
         default:
             return state;

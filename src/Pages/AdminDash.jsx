@@ -23,20 +23,21 @@ const useStyles = makeStyles({
 });
 
 const columns = [
-  { id: 'child', label: 'Child', minWidth: 170 },
+  { id: 'name', label: 'Name of patient', minWidth: 170 },
+  { id: 'parent', label: 'Parent', minWidth: 170 },
   { id: 'phone', label: 'Phone Number', minWidth: 150 },
   { id: 'status', label: 'Status', minWidth: 50 },
   { id: 'actions', label: 'Actions', minWidth: 125 },
 ];
 
-function createData(child, phone, status, actions) {
-  return { child, phone, status, actions };
+function createData(name, parent, phone, status, actions) {
+  return { name, parent, phone, status, actions };
 }
 
 const actionButtons = (
   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
     <Button variant="contained" color="primary">
-      Edit
+      View
     </Button>
     <Button variant="contained" color="secondary">
       Delete
@@ -45,9 +46,9 @@ const actionButtons = (
 );
 
 const rows = [
-  createData('Ryan', 94712430342, 'Tested', actionButtons),
-  createData('Ryan', 94712430342, 'Awaiting Results', actionButtons),
-  createData('Ryan', 94712430342, 'Tested', actionButtons),
+  createData('Ryan', 'Lea Kagen', 94712430342, 'Tested', actionButtons),
+  createData('Ryan', 'Lea Kagen', 94712430342, 'Tested', actionButtons),
+  createData('Ryan', 'Lea Kagen', 94712430342, 'Tested', actionButtons),
 ];
 
 export default function StickyHeadTable() {
@@ -71,7 +72,7 @@ export default function StickyHeadTable() {
         <TableContainer className={classes.container}>
           <Toolbar>
             <Typography variant="h6" id="tableTitle" component="div">
-              List of Children
+              List of Patients
             </Typography>
           </Toolbar>
           <Table stickyHeader aria-label="sticky table">

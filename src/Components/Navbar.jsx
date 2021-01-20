@@ -6,16 +6,19 @@ import { useAuth } from "../context/AuthContext";
 const Navbar = () => {
   const { auth } = useAuth();
 
+  const link = auth.role === "Parent" ? "/parent-dash" : "/doctor-dash";
+
   return (
     <nav className="nav">
       <h3 className="nav__logo">SpectrumScreen+</h3>
       <div className="btn-wrap">
-        {auth.userId && 
-        <>
-          <Link to="/dash">
+        {auth.userId && (
+          <>
+            <Link to = {link}>
               <button className="nav__signup">Account</button>
             </Link>
-        </>}
+          </>
+        )}
         {!auth.userId && (
           <>
             <Link to="/">
