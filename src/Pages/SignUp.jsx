@@ -16,7 +16,7 @@ import Container from "@material-ui/core/Container";
 //import SignIn from './Register';
 import { useForm } from "react-hook-form";
 import { Radio, RadioGroup } from "@material-ui/core";
-import { singup } from "../lib/api"
+import { singup } from "../lib/api";
 
 function Copyright() {
   return (
@@ -172,7 +172,7 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
