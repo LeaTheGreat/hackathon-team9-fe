@@ -6,6 +6,7 @@ import Home from '../Pages/Home';
 import ParentDashboard from '../Pages/ParentDashboard';
 import AdminDash from '../Pages/AdminDash';
 import SurveyForm from '../Components/SurveyForm';
+import SurveyStyle from '../Components/SurveyStyle';
 import { AuthProvider } from '../context/AuthContext';
 
 const Main = () => {
@@ -26,8 +27,11 @@ const Main = () => {
             <ParentDashboard />
           </Route>
           <Route path="/survey">
-          <SurveyForm/>
-        </Route>
+            <SurveyForm />
+          </Route>
+          <Route path="/survey-new">
+            <SurveyStyle />
+          </Route>
           <Route path="/admin-dash">
             <AdminDash />
           </Route>
