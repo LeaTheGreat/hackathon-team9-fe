@@ -4,19 +4,15 @@ import Article1 from '../scss/img/article-1.jpg';
 import Article2 from '../scss/img/article-2.jpg';
 import Article3 from '../scss/img/article-3.jpg';
 import { FaArrowCircleRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Navbar from '../Components/Navbar';
 
 const Home = () => {
   return (
     <>
       {/* Hero */}
       <main className="hero">
-        <nav className="nav">
-          <h3 className="nav__logo">SpectrumScreen+</h3>
-          <div className="btn-wrap">
-            <button className="nav__login">Log In</button>
-            <button className="nav__signup">Sign Up</button>
-          </div>
-        </nav>
+        <Navbar />
         <img src={Baby} alt="baby" className="hero__img" />
       </main>
 
