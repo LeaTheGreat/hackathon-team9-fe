@@ -36,3 +36,7 @@ const updateUser = async (id, userInfo) => {
         console.log(err);
     }
 }
+
+export {
+    singup, login, getUserById, updateUser
+};

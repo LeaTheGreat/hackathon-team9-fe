@@ -1,26 +1,27 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Link from '@material-ui/core/Link';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Link from "@material-ui/core/Link";
 // import { Link } from 'react-router-dom';
 //import MuiPhoneInput from 'material-ui-phone-number';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 //import SignIn from './Register';
-import { useForm } from 'react-hook-form';
-import { Radio, RadioGroup } from '@material-ui/core';
+import { useForm } from "react-hook-form";
+import { Radio, RadioGroup } from "@material-ui/core";
+import { singup } from "../lib/api"
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © 2021 '}
+      {"Copyright © 2021 "}
       <Link color="inherit" href="https://material-ui.com/">
         Spectrum Screen+
       </Link>
@@ -31,16 +32,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -50,7 +51,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    const response = await singup(data);
+    if (response.error) {
+      console.log(response.error);
+    } else {
+      console.log("secuess");
+
+    }
+  };
 
   const classes = useStyles();
 
@@ -97,9 +107,9 @@ export default function SignUp() {
                 required
                 fullWidth
                 type="number"
-                id="phone"
+                id="phoneNumber"
                 label="Phone Number"
-                name="phone"
+                name="phoneNumber"
                 inputRef={register}
               />
             </Grid>
@@ -130,23 +140,25 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <RadioGroup
-                style={{ justifyContent: 'space-around' }}
+                style={{ justifyContent: "space-around" }}
                 row
-                aria-label="position"
-                name="position"
+                aria-label="role"
+                name="role"
                 defaultValue="top"
               >
                 <FormControlLabel
-                  value="parent"
+                  value="Parent"
                   control={<Radio color="primary" />}
                   label="I am a parent"
                   labelPlacement="start"
+                  inputRef={register}
                 />
                 <FormControlLabel
-                  value="doctor"
+                  value="Doctor"
                   control={<Radio color="primary" />}
                   label="I am a doctor"
                   labelPlacement="start"
+                  inputRef={register}
                 />
               </RadioGroup>
             </Grid>
