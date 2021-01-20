@@ -35,6 +35,7 @@ function Option({ option, register, name }) {
       <FormControlLabel
         inputRef={register({ required: true })}
         value={option._id}
+        id={name + "_" + option._id}
         control={
           <Radio inputRef={register({ required: true })} color="primary" />
         }
@@ -49,7 +50,7 @@ function Question({ question, register }) {
   const classes = useStyles();
 
   return (
-    <>
+    <FormControl component="fieldset">
       <FormLabel className={classes.title} component="legend">
         {question.question}
       </FormLabel>
@@ -70,7 +71,7 @@ function Question({ question, register }) {
             />
           ))}
       </RadioGroup>
-    </>
+    </FormControl>
   );
 }
 
@@ -514,7 +515,7 @@ export default function FormControlLabelPlacement() {
       <Typography className={classes.heading} variant="h2">
         Survey
       </Typography>
-      <FormControl component="fieldset" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {questions &&
           questions.map((question) => (
             <Question
@@ -526,7 +527,7 @@ export default function FormControlLabelPlacement() {
         <Button type="submit" variant="contained" color="primary">
           SUBMIT
         </Button>
-      </FormControl>
+      </form>
     </Container>
   );
 }
