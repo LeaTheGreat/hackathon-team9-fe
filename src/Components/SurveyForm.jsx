@@ -120,7 +120,7 @@ export default function SurveyForm(props) {
                 <fieldset id='q4'>
                     <h5>Does your child point to share interest with you? (e.g. pointing at an interesting sight)</h5>
                     <div className='answer-wrapper'>
-                    <input required type="radio" value='0' id='q9-0' name='q4' onClick={onValuesChange} />
+                    <input required type="radio" value='0' id='q4-0' name='q4' onClick={onValuesChange} />
                     <label htmlFor='q4-0'>Many times a day</label>
                     <input required type="radio" value='1' id='q4-1' name='q4' onClick={onValuesChange} />
                     <label htmlFor='q4-1'>A few times a day</label>

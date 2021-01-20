@@ -76,7 +76,7 @@ fieldset {
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background-color: royalblue;
-  border: 3px solid #be4848;
+  border: 3px solid transparent;
   color: white;
   border-radius: 4px;
   font-size: 1.2rem;
@@ -86,6 +86,6 @@ fieldset {
 }
 
 .submit:hover {
-  border: 3px dotted #be4848;
+  border: 3px solid #be4848;
 }
 /*# sourceMappingURL=survey.css.map */

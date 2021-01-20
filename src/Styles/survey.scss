@@ -55,7 +55,7 @@ fieldset {
   left: 50%;
   transform: translateX(-50%);
   background-color: royalblue;
-  border: 3px solid rgb(190, 72, 72);
+  border: 3px solid transparent;
   color: white;
   border-radius: 4px;
   font-size: 1.2rem;
@@ -63,6 +63,6 @@ fieldset {
   margin: 0.5rem auto;
   cursor: pointer;
   &:hover {
-    border: 3px dotted rgb(190, 72, 72);
+    border: 3px solid rgb(190, 72, 72);
   }
 }
