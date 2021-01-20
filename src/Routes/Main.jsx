@@ -1,10 +1,11 @@
-import React from "react";
-import Register from "../Pages/Register";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import SignUp from "../Pages/SignUp";
-import Home from "../Pages/Home";
-import ParentDashboard from "../Pages/ParentDashboard";
-import { AuthProvider } from "../context/AuthContext";
+import React from 'react';
+import Register from '../Pages/Register';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import SignUp from '../Pages/SignUp';
+import Home from '../Pages/Home';
+import ParentDashboard from '../Pages/ParentDashboard';
+import AdminDash from '../Pages/AdminDash';
+import { AuthProvider } from '../context/AuthContext';
 
 const Main = () => {
   return (
@@ -20,8 +21,11 @@ const Main = () => {
           <Route path="/home">
             <Home />
           </Route>
-          <Route path="/dash">
+          <Route path="/parent-dash">
             <ParentDashboard />
+          </Route>
+          <Route path="/admin-dash">
+            <AdminDash />
           </Route>
           <Route path="/">
             <Home />
