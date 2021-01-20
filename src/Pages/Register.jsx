@@ -47,7 +47,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  
+  const onSubmit = (data) => {
+    console.log(data);
+  }
+  
 
   const classes = useStyles();
 
