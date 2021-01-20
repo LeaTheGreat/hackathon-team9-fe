@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { useForm } from 'react-hook-form';
-import { Radio, RadioGroup } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
-import { singup } from '../lib/api';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { useForm } from "react-hook-form";
+import { Radio, RadioGroup } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
+import { singup } from "../lib/api";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © 2021 '}
+      {"Copyright © 2021 "}
       <Link color="inherit" href="https://material-ui.com/">
         Spectrum Screen+
       </Link>
@@ -30,40 +30,40 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   modalPaper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
   modalHeading: {
-    textAlign: 'center',
-    marginBottom: '10px',
+    textAlign: "center",
+    marginBottom: "10px",
   },
   modalText: {
-    fontSize: '15px',
-    marginBottom: '1rem',
-    textAlign: 'center',
+    fontSize: "15px",
+    marginBottom: "1rem",
+    textAlign: "center",
   },
 }));
 
@@ -76,7 +76,7 @@ export default function SignUp() {
       setModalBody(errorModal);
       toggleModal();
     } else {
-      console.log('secuess');
+      console.log("secuess");
       setModalBody(successModal);
       toggleModal();
     }
@@ -94,7 +94,9 @@ export default function SignUp() {
       <Typography variant="h4" component="h2" className={classes.modalHeading}>
         Error
       </Typography>
-      <p className={classes.modalText}>There was an error creating your account 😭💔</p>
+      <p className={classes.modalText}>
+        There was an error creating your account 😭💔
+      </p>
       <Button onClick={toggleModal} variant="contained" color="secondary">
         Close Modal
       </Button>
@@ -191,7 +193,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <RadioGroup
-                  style={{ justifyContent: 'space-around' }}
+                  style={{ justifyContent: "space-around" }}
                   row
                   aria-label="role"
                   name="role"
