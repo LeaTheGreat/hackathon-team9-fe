@@ -6,11 +6,11 @@ const Navbar = () => {
     <nav className="nav">
       <h3 className="nav__logo">SpectrumScreen+</h3>
       <div className="btn-wrap">
-        <Link to="/login">
-          <button className="nav__login">Log In</button>
+        <Link to="/home">
+          <button className="nav__login">Home</button>
         </Link>
-        <Link to="/signup">
-          <button className="nav__signup">Sign Up</button>
+        <Link to="/home">
+          <button className="nav__signup">Account</button>
         </Link>
       </div>
     </nav>
