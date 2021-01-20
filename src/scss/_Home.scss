@@ -114,36 +114,3 @@
     gap: 1rem;
   }
 }
-
-.article {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 20rem;
-  @media only screen and (max-width: $bp-large) {
-    width: 15rem;
-  }
-  &__img {
-    max-width: 20rem;
-    margin-bottom: 1rem;
-    @media only screen and (max-width: $bp-large) {
-      width: 15rem;
-    }
-  }
-  &__title {
-    margin-bottom: 1rem;
-  }
-  &__description {
-    color: #7d8285;
-    margin-bottom: 1rem;
-  }
-  &__btn {
-    font-size: 1.25rem;
-    color: #4f86c3;
-    transition: all 0.3s;
-    &:hover {
-      color: #406a9b;
-    }
-  }
-}
