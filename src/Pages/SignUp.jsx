@@ -4,9 +4,9 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 // import { Link } from 'react-router-dom';
+import MuiPhoneInput from 'material-ui-phone-number';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SignIn from './Register';
+import { useForm } from 'react-hook-form';
+import { Radio, RadioGroup } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -47,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   const classes = useStyles();
 
   return (
@@ -59,7 +64,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -70,6 +75,7 @@ export default function SignUp() {
                 fullWidth
                 id="firstName"
                 label="First Name"
+                inputRef={register}
                 autoFocus
               />
             </Grid>
@@ -81,7 +87,20 @@ export default function SignUp() {
                 id="lastName"
                 label="Last Name"
                 name="lastName"
+                inputRef={register}
                 autoComplete="lname"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                type="number"
+                id="phone"
+                label="Phone Number"
+                name="phone"
+                inputRef={register}
               />
             </Grid>
             <Grid item xs={12}>
@@ -92,6 +111,7 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 name="email"
+                inputRef={register}
                 autoComplete="email"
               />
             </Grid>
@@ -104,14 +124,31 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                inputRef={register}
                 autoComplete="current-password"
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I am a human."
-              />
+              <RadioGroup
+                style={{ justifyContent: 'space-around' }}
+                row
+                aria-label="position"
+                name="position"
+                defaultValue="top"
+              >
+                <FormControlLabel
+                  value="parent"
+                  control={<Radio color="primary" />}
+                  label="I am a parent"
+                  labelPlacement="start"
+                />
+                <FormControlLabel
+                  value="doctor"
+                  control={<Radio color="primary" />}
+                  label="I am a doctor"
+                  labelPlacement="start"
+                />
+              </RadioGroup>
             </Grid>
           </Grid>
           <Button

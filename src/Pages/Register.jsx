@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useForm } from 'react-hook-form';
 
 function Copyright() {
   return (
@@ -45,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
   const classes = useStyles();
 
   return (
@@ -57,28 +61,24 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
+            inputRef={register}
             autoFocus
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Password"
             type="password"
-            id="password"
-            autoComplete="current-password"
+            inputRef={register}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
