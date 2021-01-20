@@ -1,12 +1,31 @@
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { getUserById } from "../lib/api";
+import { logout } from "../lib/api";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { auth } = useAuth();
+  const { auth, dispatch } = useAuth();
+  let link;
 
-  const link = auth.role === "Parent" ? "/parent-dash" : "/doctor-dash";
+  switch (auth.role) {
+    case "Parent":
+      link = "/parent-dash";
+      break;
+    case "Doctor":
+      link = "/doctor-dash";
+      break;
+    case "Admin":
+    default:
+      link = "/admin-dash";
+      break;
+  }
+
+  const handleLogout = async () => {
+    dispatch({
+      type: "LOGOUT",
+    });
+    await logout();
+  };
 
   return (
     <nav className="nav">
@@ -14,14 +33,17 @@ const Navbar = () => {
       <div className="btn-wrap">
         {auth.userId && (
           <>
-            <Link to = {link}>
+            <button className="nav__login" onClick={handleLogout}>
+              Logout
+            </button>
+            <Link to={link}>
               <button className="nav__signup">Account</button>
             </Link>
           </>
         )}
         {!auth.userId && (
           <>
-            <Link to="/">
+            <Link to="/login">
               <button className="nav__login">Log In</button>
             </Link>
             <Link to="/signup">

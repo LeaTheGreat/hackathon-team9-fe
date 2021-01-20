@@ -19,6 +19,15 @@ const login = async (user) => {
     }
 }
 
+const logout = async () => {
+    try {
+        const response = await axios.post(baseUrl + '/api/users/logout');
+        return response.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const getUserById = async (id) => {
     try {
         const response = await axios.get(baseUrl + `/api/users/${id}`);
@@ -38,5 +47,5 @@ const updateUser = async (id, userInfo) => {
 }
 
 export {
-    singup, login, getUserById, updateUser
+    singup, login, getUserById, updateUser, logout
 };
