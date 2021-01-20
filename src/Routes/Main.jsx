@@ -1,10 +1,11 @@
 import React from 'react';
-import Register from '../Pages/Register';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Register from '../Pages/Register';
 import SignUp from '../Pages/SignUp';
 import Home from '../Pages/Home';
 import ParentDashboard from '../Pages/ParentDashboard';
 import AdminDash from '../Pages/AdminDash';
+import SurveyForm from '../Components/SurveyForm';
 import { AuthProvider } from '../context/AuthContext';
 
 const Main = () => {
@@ -24,6 +25,9 @@ const Main = () => {
           <Route path="/parent-dash">
             <ParentDashboard />
           </Route>
+          <Route path="/survey">
+          <SurveyForm/>
+        </Route>
           <Route path="/admin-dash">
             <AdminDash />
           </Route>
