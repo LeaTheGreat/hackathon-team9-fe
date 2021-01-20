@@ -52,13 +52,11 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const { register, handleSubmit } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
     const response = await singup(data);
     if (response.error) {
       console.log(response.error);
     } else {
       console.log("secuess");
-
     }
   };
 
