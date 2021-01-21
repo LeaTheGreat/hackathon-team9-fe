@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -8,8 +8,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import NavbarFull from '../Components/NavbarFull';
 import { Button, Toolbar, Typography } from '@material-ui/core';
+import AddChildModal from '../Modals/AddChild';
 
 const useStyles = makeStyles({
   root: {
@@ -19,6 +22,10 @@ const useStyles = makeStyles({
   container: {
     borderRadius: '20px',
     maxHeight: 440,
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 });
 
@@ -36,9 +43,9 @@ function createData(child, phone, status, actions) {
 const actionButtons = (
   <div style={{ display: 'flex', justifyContent: 'space-around' }}>
     <Button variant="contained" color="primary">
-      Edit
+      View
     </Button>
-    <Button variant="contained" color="secondary">
+    <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>
       Delete
     </Button>
   </div>
@@ -64,15 +71,29 @@ export default function StickyHeadTable() {
     setPage(0);
   };
 
+  const [open, setOpen] = useState(false);
+
+  const toggleModal = () => {
+    setOpen(!open);
+  };
+
   return (
     <div className="dash">
       <NavbarFull />
       <Paper className={classes.root}>
         <TableContainer className={classes.container}>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <Typography variant="h6" id="tableTitle" component="div">
               List of Children
             </Typography>
+            <Button
+              onClick={toggleModal}
+              variant="contained"
+              color="primary"
+              endIcon={<AddCircleIcon />}
+            >
+              Add Child
+            </Button>
           </Toolbar>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -118,6 +139,7 @@ export default function StickyHeadTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <AddChildModal open={open} toggleModal={toggleModal} />
     </div>
   );
 }
