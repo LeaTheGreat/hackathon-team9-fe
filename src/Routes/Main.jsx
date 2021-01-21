@@ -39,6 +39,7 @@ const Main = () => {
           </AdminRoute>
           <Route exact path="/survey/:id" component={SurveyStyle} />
           <Route exact path="/view/:id" component={ViewPage} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </Router>
     </AuthProvider>

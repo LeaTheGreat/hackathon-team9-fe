@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { getSurveyByChildId } from "../lib/api";
 import Typography from "@material-ui/core/Typography";
 import {
-  Card,
-  CardContent,
   Container,
   Paper,
   Toolbar,
@@ -43,7 +41,7 @@ export default function ViewPage(props) {
     console.log(survey);
     const prc = survey.prediction_probability * 100;
 
-    if (survey.prediction == 1) {
+    if (survey.prediction === 1) {
       return `With probability ${prc}% child has potential for ASD`;
     } else {
       return `With probability ${prc}% child has NO potential for ASD`;
