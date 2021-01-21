@@ -23,6 +23,8 @@ const useStyles = makeStyles({
 });
 
 const Home = () => {
+  const history = useHistory();
+  
   return (
     <>
       {/* Hero */}
@@ -39,7 +41,9 @@ const Home = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia rem
             deserunt optio omnis ipsa tempora.
           </p>
-          <button className="test__button">TEST</button>
+          <button className="test__button" onClick={()=> history.push('/survey')}>
+            TEST
+          </button>
         </div>
         <div className="test">
           <h3 className="test__heading">Latest Articles</h3>
