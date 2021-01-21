@@ -68,7 +68,7 @@ function ArticleContainer(props) {
   }, []);
   return (
     // <section className="articles">
-    <Grid container spacing={4}>
+    <Grid container spacing={4} justify="space-evenly">
       {articles &&
         articles.map((article) => (
           <Article key={article._id} article={article} />
@@ -87,7 +87,7 @@ function Article({ article }) {
   ]);
 
   return (
-    <Grid item xs={12} md={4} justify="space-evenly">
+    <Grid item xs={12} md={4}>
       <Card className={classes.root} onClick={callback}>
         <CardActionArea>
           <CardMedia className={classes.media} image={article.picture} />
