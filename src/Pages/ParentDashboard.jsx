@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -13,6 +13,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import NavbarFull from '../Components/NavbarFull';
 import { Button, Toolbar, Typography } from '@material-ui/core';
 import AddChildModal from '../Modals/AddChild';
+import { getChildrenRelatedToParent } from '../lib/api';
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +59,8 @@ const rows = [
 ];
 
 export default function StickyHeadTable() {
+  const [children, setChildren] = useState([]);
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -65,6 +68,12 @@ export default function StickyHeadTable() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  useEffect(() => {
+    getChildrenRelatedToParent().then((res) => {
+      console.log('CHILDREN!!!!!', res);
+    });
+  }, []);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
