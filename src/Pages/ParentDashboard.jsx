@@ -163,7 +163,7 @@ function ChildRow({ row, columns }) {
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-      {columns.forEach((column) => {
+      {columns.map((column) => {
         if (column.id !== "actions") {
           const value = row[column.id];
           return (
