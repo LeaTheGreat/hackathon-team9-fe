@@ -65,6 +65,24 @@ const getArticleById = async (id) => {
   }
 };
 
+const getChildrenRelatedToParent = async (id) => {
+  try {
+    const response = await axios.get(baseUrl + `/api/child/${id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const addNewChild = async (child) => {
+  try {
+    const response = await axios.post(baseUrl + `/api/child/`, { child });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export {
   singup,
   login,
@@ -73,4 +91,6 @@ export {
   logout,
   getArticles,
   getArticleById,
+  addNewChild,
+  getChildrenRelatedToParent
 };
