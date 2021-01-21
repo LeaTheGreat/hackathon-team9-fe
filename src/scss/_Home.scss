@@ -17,6 +17,16 @@
       width: 25rem;
     }
   }
+  &__text {
+    color: #fff;
+    font-size: 1.35rem;
+    max-width: 50rem;
+    text-align: center;
+    margin: auto;
+    font-style: italic;
+    text-shadow: rgb(57, 57, 57);
+    margin-bottom: 1.5rem;
+  }
 }
 
 .nav {

@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from "react";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
-import { useForm } from "react-hook-form";
-import { getQuestions } from "../lib/api";
+import React, { useState, useEffect } from 'react';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import { Button, Container, makeStyles, Paper, Typography } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
+import { getQuestions } from '../lib/api';
 
 const useStyles = makeStyles(() => ({
   container: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    background: 'linear-gradient(135deg, #172a74, #21a9af);',
+    padding: '1rem',
+  },
+  paper: {
+    padding: '1rem',
   },
   heading: {
-    marginBottom: "20px",
+    marginBottom: '20px',
   },
   title: {
-    color: "#000",
-    fontSize: "18px",
-    fontWeight: "500",
-    marginBottom: "10px",
+    color: '#000',
+    fontSize: '18px',
+    fontWeight: '500',
+    marginBottom: '10px',
   },
   formGroup: {
-    marginBottom: "20px",
+    marginBottom: '20px',
   },
 }));
 
@@ -35,10 +36,8 @@ function Option({ option, register, name }) {
       <FormControlLabel
         inputRef={register({ required: true })}
         value={option._id}
-        id={name + "_" + option._id}
-        control={
-          <Radio inputRef={register({ required: true })} color="primary" />
-        }
+        id={name + '_' + option._id}
+        control={<Radio inputRef={register({ required: true })} color="primary" />}
         label={option.option}
         labelPlacement="start"
       />
@@ -64,7 +63,7 @@ function Question({ question, register }) {
         {question.options &&
           question.options.map((option) => (
             <Option
-              key={question._id + "_" + option._id}
+              key={question._id + '_' + option._id}
               option={option}
               register={register}
               name={question._id}
@@ -90,23 +89,23 @@ export default function FormControlLabelPlacement() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container} maxWidth="md">
-      <Typography className={classes.heading} variant="h2">
-        Survey
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {questions &&
-          questions.map((question) => (
-            <Question
-              key={question._id}
-              question={question}
-              register={register}
-            />
-          ))}
-        <Button type="submit" variant="contained" color="primary">
-          SUBMIT
-        </Button>
-      </form>
-    </Container>
+    <div className={classes.container}>
+      <Container maxWidth={'md'}>
+        <Paper className={classes.paper} elevation={3}>
+          <Typography className={classes.heading} variant="h2">
+            Survey
+          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {questions &&
+              questions.map((question) => (
+                <Question key={question._id} question={question} register={register} />
+              ))}
+            <Button type="submit" variant="contained" color="primary">
+              SUBMIT
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </div>
   );
 }

@@ -46,8 +46,9 @@ const AddChildModal = ({ open, toggleModal }) => {
       minWidth: 120,
     },
     formHeading: {
-      fontSize: '30px',
-      marginBottom: '10px',
+      fontSize: '35px',
+      marginBottom: '20px',
+      fontWeight: '500',
       textAlign: 'center',
     },
     root: {

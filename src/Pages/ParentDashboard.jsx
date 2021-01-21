@@ -13,67 +13,87 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import NavbarFull from '../Components/NavbarFull';
 import { Button, Toolbar, Typography } from '@material-ui/core';
 import AddChildModal from '../Modals/AddChild';
+import DeleteChildModal from '../Modals/DeleteChild';
 import { getChildrenRelatedToParent } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
-
-const useStyles = makeStyles({
-  root: {
-    width: '95%',
-    margin: 'auto',
-  },
-  container: {
-    borderRadius: '20px',
-    maxHeight: 440,
-  },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-});
-
-const columns = [
-  { id: 'child', label: 'Child', minWidth: 170 },
-  { id: 'phone', label: 'Phone Number', minWidth: 150 },
-  { id: 'status', label: 'Status', minWidth: 50 },
-  { id: 'actions', label: 'Actions', minWidth: 125 },
-];
-
-function createData(child, phone, status, actions) {
-  return { child, phone, status, actions };
-}
-
-const actionButtons = (
-  <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-    <Button variant="contained" color="primary">
-      View
-    </Button>
-    <Button variant="contained" color="secondary" startIcon={<DeleteIcon />}>
-      Delete
-    </Button>
-  </div>
-);
-
-const rows = [
-  createData('Ryan', 94712430342, 'Tested', actionButtons),
-  createData('Ryan', 94712430342, 'Awaiting Results', actionButtons),
-  createData('Ryan', 94712430342, 'Tested', actionButtons),
-];
 
 export default function StickyHeadTable() {
   const { auth } = useAuth();
 
+  // Form styles
+  const useStyles = makeStyles({
+    root: {
+      width: '95%',
+      margin: 'auto',
+    },
+    container: {
+      borderRadius: '20px',
+      maxHeight: 440,
+    },
+    toolbar: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+  });
   const classes = useStyles();
+
+  const columns = [
+    { id: 'child', label: 'Child', minWidth: 170 },
+    { id: 'phone', label: 'Phone Number', minWidth: 150 },
+    { id: 'status', label: 'Status', minWidth: 50 },
+    { id: 'actions', label: 'Actions', minWidth: 125 },
+  ];
+
+  function createData(child, phone, status, actions) {
+    return { child, phone, status, actions };
+  }
+
+  // Modal States
+  const [open, setOpen] = useState(false);
+  const toggleModal = () => {
+    setOpen(!open);
+  };
+
+  // Modal States
+  const [deleteModal, setDeleteModal] = useState(false);
+  const toggleDeleteModal = () => {
+    setDeleteModal(!deleteModal);
+  };
+
+  const actionButtons = (
+    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+      <Button variant="contained" color="primary">
+        View
+      </Button>
+      <Button
+        onClick={toggleDeleteModal}
+        variant="contained"
+        color="secondary"
+        startIcon={<DeleteIcon />}
+      >
+        Delete
+      </Button>
+    </div>
+  );
+
+  const rows = [
+    createData('Ryan', 94712430342, 'Tested', actionButtons),
+    createData('Ryan', 94712430342, 'Awaiting Results', actionButtons),
+    createData('Ryan', 94712430342, 'Tested', actionButtons),
+  ];
+
+  // Pagination
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     console.log('USER ID: ', auth.userId);
@@ -81,12 +101,6 @@ export default function StickyHeadTable() {
       console.log('CHILDREN!!!!!', res);
     });
   }, []);
-
-  const [open, setOpen] = useState(false);
-
-  const toggleModal = () => {
-    setOpen(!open);
-  };
 
   return (
     <div className="dash">
@@ -150,6 +164,7 @@ export default function StickyHeadTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <DeleteChildModal open={deleteModal} toggleModal={toggleDeleteModal} />
       <AddChildModal open={open} toggleModal={toggleModal} />
     </div>
   );
