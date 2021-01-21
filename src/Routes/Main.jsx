@@ -6,7 +6,7 @@ import Home from "../Pages/Home";
 import ParentDashboard from "../Pages/ParentDashboard";
 import DoctorDashboard from "../Pages/DoctorDashboard";
 import AdminDashboard from "../Pages/AdminDashboard";
-import SurveyForm from "../Components/SurveyForm";
+import SurveyStyle from "../Components/SurveyStyle";
 import { AuthProvider } from "../context/AuthContext";
 import DoctorRoute from "./DoctorRoute";
 import AdminRoute from "./AdminRoute";
@@ -35,7 +35,7 @@ const Main = () => {
             <AdminDashboard />
           </AdminRoute>
           <Route path="/survey">
-            <SurveyForm />
+            <SurveyStyle />
           </Route>
           <Route path="/">
             <Home />

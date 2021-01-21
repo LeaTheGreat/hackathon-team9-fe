@@ -2,6 +2,8 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:5000";
 
+axios.defaults.withCredentials = true;
+
 const singup = async (user) => {
   try {
     const response = await axios.post(baseUrl + "/api/users/signup", { user });
@@ -81,7 +83,7 @@ const addNewChild = async (child) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 const deleteChild = async (id) => {
   try {
@@ -90,7 +92,16 @@ const deleteChild = async (id) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+const getQuestions = async () => {
+  try {
+    const response = await axios.get(baseUrl + `/api/question/`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export {
   singup,
@@ -102,5 +113,6 @@ export {
   getArticleById,
   addNewChild,
   deleteChild,
-  getChildrenRelatedToParent
+  getChildrenRelatedToParent,
+  getQuestions,
 };
