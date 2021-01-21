@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../context/AuthContext';
 
 const AddChildModal = ({ open, toggleModal }) => {
   const { register, handleSubmit } = useForm();
@@ -50,11 +51,17 @@ const AddChildModal = ({ open, toggleModal }) => {
 
   const classes = useStyles();
 
+  // const { auth } = useAuth();
+  // const handleClick = () => {
+  //   deleteChild(auth.userId)
+  // }
+
   const modalBody = (
     <div className={classes.modalPaper}>
       <Typography className={classes.formHeading} variant="h4" component="h2">
         Delete Child
       </Typography>
+      <p className={classes.modalText}>Are you sure you want to delete??</p>
       <Button type="submit" variant="contained" color="secondary">
         Delete Child
       </Button>

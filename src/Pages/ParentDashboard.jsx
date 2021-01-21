@@ -14,6 +14,7 @@ import NavbarFull from '../Components/NavbarFull';
 import { Button, Toolbar, Typography } from '@material-ui/core';
 import AddChildModal from '../Modals/AddChild';
 import { getChildrenRelatedToParent } from '../lib/api';
+import { useAuth } from '../context/AuthContext';
 
 const useStyles = makeStyles({
   root: {
@@ -59,7 +60,7 @@ const rows = [
 ];
 
 export default function StickyHeadTable() {
-  const [children, setChildren] = useState([]);
+  const { auth } = useAuth();
 
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
@@ -69,16 +70,17 @@ export default function StickyHeadTable() {
     setPage(newPage);
   };
 
-  useEffect(() => {
-    getChildrenRelatedToParent().then((res) => {
-      console.log('CHILDREN!!!!!', res);
-    });
-  }, []);
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    console.log('USER ID: ', auth.userId);
+    getChildrenRelatedToParent(auth.userId).then((res) => {
+      console.log('CHILDREN!!!!!', res);
+    });
+  }, []);
 
   const [open, setOpen] = useState(false);
 
