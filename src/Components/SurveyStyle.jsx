@@ -1,29 +1,66 @@
 import React, { useState, useEffect } from "react";
-import "../Styles/survey.css";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+
+const useStyles = makeStyles(() => ({
+  container: {
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+  },
+  heading: {
+    marginBottom: "20px",
+  },
+  title: {
+    color: "#000",
+    fontSize: "18px",
+    fontWeight: "500",
+    marginBottom: "10px",
+  },
+  formGroup: {
+    marginBottom: "20px",
+  },
+}));
 
 function Option({ option, register, name }) {
   return (
     <>
-      <input
-        required
-        type="radio"
+      <FormControlLabel
+        inputRef={register({ required: true })}
         value={option._id}
         id={name + "_" + option._id}
-        name={name}
-        ref={register({ required: true })}
+        control={
+          <Radio inputRef={register({ required: true })} color="primary" />
+        }
+        label={option.option}
+        labelPlacement="start"
       />
-      <label htmlFor={name + "_" + option._id}>{option.option}</label>
     </>
   );
 }
 
 function Question({ question, register }) {
+  const classes = useStyles();
+
   return (
-    <fieldset id={question._id}>
-      <h5>{question.question}</h5>
-      <div className="answer-wrapper">
+    <FormControl component="fieldset">
+      <FormLabel className={classes.title} component="legend">
+        {question.question}
+      </FormLabel>
+      <RadioGroup
+        inputRef={register({ required: true })}
+        row
+        aria-label="position"
+        className={classes.formGroup}
+        name={question._id}
+      >
         {question.options &&
           question.options.map((option) => (
             <Option
@@ -33,8 +70,8 @@ function Question({ question, register }) {
               name={question._id}
             />
           ))}
-      </div>
-    </fieldset>
+      </RadioGroup>
+    </FormControl>
   );
 }
 
@@ -459,7 +496,7 @@ const getQuestions = async () => {
   }
 };
 
-export default function SurveyForm(props) {
+export default function FormControlLabelPlacement() {
   const { register, handleSubmit } = useForm();
   const [questions, setQuestions] = useState([]);
   const onSubmit = (data) => {
@@ -471,10 +508,14 @@ export default function SurveyForm(props) {
     });
   }, []);
 
+  const classes = useStyles();
+
   return (
-    <div className="wrapper">
-      <h4 className="header">Generic Header</h4>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <Container className={classes.container} maxWidth="md">
+      <Typography className={classes.heading} variant="h2">
+        Survey
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {questions &&
           questions.map((question) => (
             <Question
@@ -483,8 +524,10 @@ export default function SurveyForm(props) {
               register={register}
             />
           ))}
-        <button className="submit">Submit</button>
+        <Button type="submit" variant="contained" color="primary">
+          SUBMIT
+        </Button>
       </form>
-    </div>
+    </Container>
   );
 }
