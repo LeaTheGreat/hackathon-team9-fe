@@ -1,0 +1,50 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(45deg, #172a74, #21a9af);
+  &__top {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto 0.5rem auto;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logo {
+    color: #fff;
+    font-size: 1.75rem;
+  }
+  &__built {
+    color: rgb(53, 53, 53);
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+  &__people {
+    color: rgb(38, 38, 38);
+    width: 30%;
+    font-weight: 500;
+    text-align: right;
+  }
+  &__copy {
+    color: rgb(215, 215, 215);
+    font-weight: 300;
+    font-size: 1.1rem;
+  }
+  &__links {
+    a {
+      color: #fff;
+      margin: 0 0.5rem;
+      transition: all 0.3s;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
