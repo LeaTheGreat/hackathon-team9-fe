@@ -147,11 +147,15 @@ function ChildRow({ row, columns }) {
     history,
     row._id,
   ]);
+  const callbackView = useCallback(() => history.push(`/view/${row._id}`), [
+    history,
+    row._id,
+  ]);
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
       {columns.map((column) => {
-        if (column.id != "actions") {
+        if (column.id !== "actions") {
           const value = row[column.id];
           return (
             <TableCell key={column.id} align={column.align}>
@@ -175,6 +179,7 @@ function ChildRow({ row, columns }) {
           variant="contained"
           color="primary"
           style={{ marginLeft: "5px" }}
+          onClick={callbackView}
         >
           View
         </Button>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -80,10 +81,14 @@ export default function FormControlLabelPlacement(props) {
   const { register, handleSubmit } = useForm();
   const [questions, setQuestions] = useState([]);
   let id = props.match.params.id;
+  const history = useHistory();
 
   const onSubmit = (data) => {
     console.log(id);
-    postSurvey(id, data).then((res) => console.log(res));
+    postSurvey(id, data).then((res) => {
+      console.log(res);
+      history.push(`/parent-dash`);
+    });
   };
   useEffect(() => {
     getQuestions().then((res) => {

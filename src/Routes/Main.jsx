@@ -11,6 +11,7 @@ import { AuthProvider } from "../context/AuthContext";
 import DoctorRoute from "./DoctorRoute";
 import AdminRoute from "./AdminRoute";
 import ArticlePage from "../Pages/ArticlePage";
+import ViewPage from "../Pages/ViewPage";
 
 const Main = () => {
   return (
@@ -37,9 +38,7 @@ const Main = () => {
             <AdminDashboard />
           </AdminRoute>
           <Route exact path="/survey/:id" component={SurveyStyle} />
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route exact path="/view/:id" component={ViewPage} />
         </Switch>
       </Router>
     </AuthProvider>
