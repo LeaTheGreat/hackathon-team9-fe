@@ -1,5 +1,6 @@
 // Add Child Modal
 import React from 'react';
+// import { AddNewChild } from '../lib/api';
 import {
   Button,
   Checkbox,
@@ -7,16 +8,21 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
-  InputLabel,
   makeStyles,
-  MenuItem,
   Modal,
-  Select,
+  Radio,
+  RadioGroup,
   TextField,
   Typography,
 } from '@material-ui/core';
+import { useForm } from 'react-hook-form';
 
 const AddChildModal = ({ open, toggleModal }) => {
+  const { register, handleSubmit } = useForm();
+
+  // Send form data to API
+  const onSubmit = (data) => console.log(data);
+
   const useStyles = makeStyles((theme) => ({
     modalPaper: {
       position: 'absolute',
@@ -28,6 +34,7 @@ const AddChildModal = ({ open, toggleModal }) => {
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      outline: 'none',
     },
     modalText: {
       fontSize: '15px',
@@ -52,11 +59,6 @@ const AddChildModal = ({ open, toggleModal }) => {
   }));
 
   const classes = useStyles();
-  const [ethnicity, setEthnicity] = React.useState('');
-
-  const handleChange = (event) => {
-    setEthnicity(event.target.value);
-  };
 
   const modalBody = (
     <div className={classes.modalPaper}>
@@ -66,34 +68,28 @@ const AddChildModal = ({ open, toggleModal }) => {
       <FormControl style={{ display: 'flex' }} noValidate autoComplete="off">
         <TextField
           style={{ marginBottom: '10px' }}
-          id="outlined-basic"
+          inputRef={register}
+          name="name"
           label="Child's Full Name"
           variant="outlined"
         />
         <TextField
           style={{ marginBottom: '10px' }}
-          id="outlined-number"
+          inputRef={register}
           label="Age"
+          name="age_month"
           type="number"
           InputLabelProps={{
             shrink: true,
           }}
           variant="outlined"
         />
-        <FormControl style={{ marginBottom: '10px' }} variant="outlined" className={classes.root}>
-          <InputLabel id="demo-simple-select-outlined-label">Sex</InputLabel>
-          <Select
-            labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined"
-            value={ethnicity}
-            onChange={handleChange}
-            label="Ethnicity"
-          >
-            <MenuItem value={'Male'}>Male</MenuItem>
-            <MenuItem value={'Female'}>Female</MenuItem>
-            <MenuItem value={'Other'}>Other</MenuItem>
-          </Select>
-        </FormControl>
+        <FormLabel component="legend">Sex</FormLabel>
+        <RadioGroup aria-label="sex" name="sex">
+          <FormControlLabel inputRef={register} value="female" control={<Radio />} label="Female" />
+          <FormControlLabel inputRef={register} value="male" control={<Radio />} label="Male" />
+          <FormControlLabel inputRef={register} value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
         <FormControl
           style={{ marginBottom: '10px' }}
           component="fieldset"
@@ -101,21 +97,20 @@ const AddChildModal = ({ open, toggleModal }) => {
         >
           <FormLabel component="legend">Check any if true: </FormLabel>
           <FormGroup>
-            <FormControlLabel control={<Checkbox name="jaundice" />} label="Child has jaundice" />
             <FormControlLabel
-              control={
-                <Checkbox
-                  // checked={'family_mem_with_ASD'}
-
-                  name="family_mem_with_ASD"
-                />
-              }
-              label="Family member with ASD"
+              control={<Checkbox name="jaundice" />}
+              label="Born with jaundice"
+              inputRef={register}
+            />
+            <FormControlLabel
+              control={<Checkbox name="family_mem_with_ASD" />}
+              label="1st degree family member has ASD"
+              inputRef={register}
             />
           </FormGroup>
         </FormControl>
-        <Button href="http://localhost:3000" variant="contained" color="primary">
-          Enter
+        <Button onClick={handleSubmit(onSubmit)} type="submit" variant="contained" color="primary">
+          Add Child
         </Button>
       </FormControl>
     </div>
