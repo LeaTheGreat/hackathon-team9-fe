@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -13,6 +13,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import NavbarFull from '../Components/NavbarFull';
 import { Button, Toolbar, Typography } from '@material-ui/core';
 import AddChildModal from '../Modals/AddChild';
+import { getChildrenRelatedToParent } from '../lib/api';
+import { useAuth } from '../context/AuthContext';
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +60,8 @@ const rows = [
 ];
 
 export default function StickyHeadTable() {
+  const { auth } = useAuth();
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -70,6 +74,13 @@ export default function StickyHeadTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    console.log('USER ID: ', auth.userId);
+    getChildrenRelatedToParent(auth.userId).then((res) => {
+      console.log('CHILDREN!!!!!', res);
+    });
+  }, []);
 
   const [open, setOpen] = useState(false);
 
