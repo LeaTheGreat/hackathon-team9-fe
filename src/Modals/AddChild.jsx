@@ -16,12 +16,19 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext";
 
 const AddChildModal = ({ open, toggleModal }) => {
   const { register, handleSubmit } = useForm();
+  const { auth } = useAuth();
 
   // Send form data to API
-  const onSubmit = (data) => addNewChild(data);
+  const onSubmit = (data) => {
+    addNewChild({ ...data, parent: auth.userId }).then((res) => {
+      console.log(res);
+      toggleModal();
+    });
+  };
 
   const useStyles = makeStyles((theme) => ({
     modalPaper: {
@@ -88,19 +95,19 @@ const AddChildModal = ({ open, toggleModal }) => {
         <RadioGroup aria-label="sex" name="sex">
           <FormControlLabel
             inputRef={register}
-            value="female"
+            value="Female"
             control={<Radio />}
             label="Female"
           />
           <FormControlLabel
             inputRef={register}
-            value="male"
+            value="Male"
             control={<Radio />}
             label="Male"
           />
           <FormControlLabel
             inputRef={register}
-            value="other"
+            value="Other"
             control={<Radio />}
             label="Other"
           />

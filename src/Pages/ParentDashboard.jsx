@@ -77,6 +77,15 @@ export default function StickyHeadTable() {
 
   const toggleModal = () => {
     setOpen(!open);
+    if (open) {
+      getChildrenRelatedToParent(auth.userId).then((res) => {
+        console.log(res);
+        const children = res.map((child) => {
+          return { ...child, actions: actionButtons };
+        });
+        setRows(children);
+      });
+    }
   };
 
   return (
