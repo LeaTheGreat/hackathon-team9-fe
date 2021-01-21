@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import Baby from '../scss/img/landing-img.jpg';
-import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import Navbar from '../Components/Navbar';
-import { getArticles } from '../lib/api';
+import React, { useState, useEffect, useCallback } from "react";
+import Baby from "../scss/img/landing-img.jpg";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import { getArticles } from "../lib/api";
 import {
   Card,
   CardActionArea,
@@ -11,11 +11,11 @@ import {
   CardContent,
   CardMedia,
   Button,
-} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Footer from '../Components/Footer';
+} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Footer from "../Components/Footer";
 
 const useStyles = makeStyles({
   media: {
@@ -39,18 +39,21 @@ const Home = () => {
         <div className="test">
           <h3 className="test__heading">Test your child</h3>
           <p className="test__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia rem deserunt optio omnis
-            ipsa tempora.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia rem
+            deserunt optio omnis ipsa tempora.
           </p>
-          <button className="test__button" onClick={() => history.push('/survey')}>
+          <button
+            className="test__button"
+            onClick={() => history.push("/parent-dash")}
+          >
             TEST
           </button>
         </div>
         <div className="test">
           <h3 className="test__heading">Latest Articles</h3>
           <p className="test__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia rem deserunt optio omnis
-            ipsa tempora.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia rem
+            deserunt optio omnis ipsa tempora.
           </p>
         </div>
       </section>
@@ -76,7 +79,10 @@ function ArticleContainer(props) {
   return (
     // <section className="articles">
     <Grid container spacing={4} justify="space-evenly">
-      {articles && articles.map((article) => <Article key={article._id} article={article} />)}
+      {articles &&
+        articles.map((article) => (
+          <Article key={article._id} article={article} />
+        ))}
     </Grid>
   );
 }
