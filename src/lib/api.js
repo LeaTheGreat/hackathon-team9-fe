@@ -103,6 +103,34 @@ const getQuestions = async () => {
   }
 };
 
+const postSurvey = async (childId, answers) => {
+  const answersArray = [];
+  let formattedAnswer;
+  for (let question in answers) {
+    formattedAnswer = {
+      "question": question,
+      "option": answers[question]
+    };
+    answersArray.push(formattedAnswer)
+  }
+  try {
+    const response = await axios.post(baseUrl + `/api/survey/child/${childId}`, { 'answers': answersArray });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const getSurveyByChildId = async (childId) => {
+  try {
+    const response = await axios.get(baseUrl + `/api/survey/child/${childId}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
 export {
   singup,
   login,
@@ -115,4 +143,6 @@ export {
   deleteChild,
   getChildrenRelatedToParent,
   getQuestions,
+  postSurvey,
+  getSurveyByChildId
 };

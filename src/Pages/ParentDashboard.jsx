@@ -94,13 +94,18 @@ export default function StickyHeadTable() {
   };
 
   const [data, setData] = useState([]);
-
   useEffect(() => {
-    console.log('USER ID: ', auth.userId);
     getChildrenRelatedToParent(auth.userId).then((res) => {
-      console.log('CHILDREN!!!!!', res);
+      console.log(res);
+      const children = res.map((child) => {
+        return { ...child, actions: actionButtons };
+      });
+      setRows(children);
     });
+
   }, []);
+
+  }, [auth.userId]);
 
   return (
     <div className="dash">
@@ -135,37 +140,87 @@ export default function StickyHeadTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+              {rows &&
+                rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <ChildRow key={row._id} row={row} columns={columns} />
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {rows && (
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
       <DeleteChildModal open={deleteModal} toggleModal={toggleDeleteModal} />
       <AddChildModal open={open} toggleModal={toggleModal} />
     </div>
+  );
+}
+
+function ChildRow({ row, columns }) {
+  const history = useHistory();
+  console.log(row);
+  const callback = useCallback(() => history.push(`/survey/${row._id}`), [
+    history,
+    row._id,
+  ]);
+  const callbackView = useCallback(() => history.push(`/view/${row._id}`), [
+    history,
+    row._id,
+  ]);
+
+  return (
+    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+      {columns.map((column) => {
+        if (column.id !== "actions") {
+          const value = row[column.id];
+          return (
+            <TableCell key={column.id} align={column.align}>
+              {column.format && typeof value === "number"
+                ? column.format(value)
+                : value}
+            </TableCell>
+          );
+        }
+      })}
+      <TableCell>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginLeft: "5px" }}
+          onClick={callback}
+        >
+          Test
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginLeft: "5px" }}
+          onClick={callbackView}
+        >
+          View
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ marginLeft: "5px" }}
+          startIcon={<DeleteIcon />}
+        >
+          Delete
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 }
