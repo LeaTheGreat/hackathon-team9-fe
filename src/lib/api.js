@@ -2,6 +2,8 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:5000";
 
+axios.defaults.withCredentials = true;
+
 const singup = async (user) => {
   try {
     const response = await axios.post(baseUrl + "/api/users/signup", { user });
