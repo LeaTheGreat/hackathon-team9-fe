@@ -1,6 +1,6 @@
 // Add Child Modal
 import React from 'react';
-// import { AddNewChild } from '../lib/api';
+import { addNewChild } from '../lib/api';
 import {
   Button,
   Checkbox,
@@ -21,7 +21,7 @@ const AddChildModal = ({ open, toggleModal }) => {
   const { register, handleSubmit } = useForm();
 
   // Send form data to API
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => addNewChild(data);
 
   const useStyles = makeStyles((theme) => ({
     modalPaper: {
