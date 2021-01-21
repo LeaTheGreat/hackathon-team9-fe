@@ -10,6 +10,7 @@ import SurveyStyle from "../Components/SurveyStyle";
 import { AuthProvider } from "../context/AuthContext";
 import DoctorRoute from "./DoctorRoute";
 import AdminRoute from "./AdminRoute";
+import ArticlePage from "../Pages/ArticlePage";
 
 const Main = () => {
   return (
@@ -25,6 +26,7 @@ const Main = () => {
           <Route path="/home">
             <Home />
           </Route>
+          <Route exact path="/article/:id" component={ArticlePage} />
           <Route path="/parent-dash">
             <ParentDashboard />
           </Route>
