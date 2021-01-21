@@ -7,7 +7,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import { Button, Container, makeStyles, Typography } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { getQuestions } from "../lib/api";
-import {postSurvey} from "../lib/api"
+import { postSurvey } from "../lib/api";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -76,14 +76,14 @@ function Question({ question, register }) {
   );
 }
 
-export default function FormControlLabelPlacement() {
+export default function FormControlLabelPlacement(props) {
   const { register, handleSubmit } = useForm();
   const [questions, setQuestions] = useState([]);
-
+  let id = props.match.params.id;
 
   const onSubmit = (data) => {
-    postSurvey('600892a9abc53a001597551f',data)
-    .then(res => console.log(res));
+    console.log(id);
+    postSurvey(id, data).then((res) => console.log(res));
   };
   useEffect(() => {
     getQuestions().then((res) => {

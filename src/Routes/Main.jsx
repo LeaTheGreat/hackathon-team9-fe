@@ -36,9 +36,7 @@ const Main = () => {
           <AdminRoute path="/admin-dash">
             <AdminDashboard />
           </AdminRoute>
-          <Route path="/survey">
-            <SurveyStyle />
-          </Route>
+          <Route exact path="/survey/:id" component={SurveyStyle} />
           <Route path="/">
             <Home />
           </Route>
