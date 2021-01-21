@@ -1,6 +1,6 @@
 // Add Child Modal
-import React from 'react';
-import { addNewChild } from '../lib/api';
+import React from "react";
+import { addNewChild } from "../lib/api";
 import {
   Button,
   Checkbox,
@@ -14,8 +14,8 @@ import {
   RadioGroup,
   TextField,
   Typography,
-} from '@material-ui/core';
-import { useForm } from 'react-hook-form';
+} from "@material-ui/core";
+import { useForm } from "react-hook-form";
 
 const AddChildModal = ({ open, toggleModal }) => {
   const { register, handleSubmit } = useForm();
@@ -25,35 +25,35 @@ const AddChildModal = ({ open, toggleModal }) => {
 
   const useStyles = makeStyles((theme) => ({
     modalPaper: {
-      position: 'absolute',
+      position: "absolute",
       width: 400,
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
       backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
+      border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
-      outline: 'none',
+      outline: "none",
     },
     modalText: {
-      fontSize: '15px',
-      marginBottom: '1rem',
-      textAlign: 'center',
+      fontSize: "15px",
+      marginBottom: "1rem",
+      textAlign: "center",
     },
     formControl: {
       margin: theme.spacing(1),
       minWidth: 120,
     },
     formHeading: {
-      fontSize: '30px',
-      marginBottom: '10px',
-      textAlign: 'center',
+      fontSize: "30px",
+      marginBottom: "10px",
+      textAlign: "center",
     },
     root: {
-      '& .MuiTextField-root': {
+      "& .MuiTextField-root": {
         margin: theme.spacing(1),
-        width: '25ch',
+        width: "25ch",
       },
     },
   }));
@@ -65,18 +65,18 @@ const AddChildModal = ({ open, toggleModal }) => {
       <Typography className={classes.formHeading} variant="h4" component="h2">
         Add Child
       </Typography>
-      <FormControl style={{ display: 'flex' }} noValidate autoComplete="off">
+      <FormControl style={{ display: "flex" }} noValidate autoComplete="off">
         <TextField
-          style={{ marginBottom: '10px' }}
+          style={{ marginBottom: "10px" }}
           inputRef={register}
           name="name"
           label="Child's Full Name"
           variant="outlined"
         />
         <TextField
-          style={{ marginBottom: '10px' }}
+          style={{ marginBottom: "10px" }}
           inputRef={register}
-          label="Age"
+          label="Age in month"
           name="age_month"
           type="number"
           InputLabelProps={{
@@ -86,12 +86,27 @@ const AddChildModal = ({ open, toggleModal }) => {
         />
         <FormLabel component="legend">Sex</FormLabel>
         <RadioGroup aria-label="sex" name="sex">
-          <FormControlLabel inputRef={register} value="female" control={<Radio />} label="Female" />
-          <FormControlLabel inputRef={register} value="male" control={<Radio />} label="Male" />
-          <FormControlLabel inputRef={register} value="other" control={<Radio />} label="Other" />
+          <FormControlLabel
+            inputRef={register}
+            value="female"
+            control={<Radio />}
+            label="Female"
+          />
+          <FormControlLabel
+            inputRef={register}
+            value="male"
+            control={<Radio />}
+            label="Male"
+          />
+          <FormControlLabel
+            inputRef={register}
+            value="other"
+            control={<Radio />}
+            label="Other"
+          />
         </RadioGroup>
         <FormControl
-          style={{ marginBottom: '10px' }}
+          style={{ marginBottom: "10px" }}
           component="fieldset"
           className={classes.formControl}
         >
@@ -109,7 +124,12 @@ const AddChildModal = ({ open, toggleModal }) => {
             />
           </FormGroup>
         </FormControl>
-        <Button onClick={handleSubmit(onSubmit)} type="submit" variant="contained" color="primary">
+        <Button
+          onClick={handleSubmit(onSubmit)}
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
           Add Child
         </Button>
       </FormControl>
