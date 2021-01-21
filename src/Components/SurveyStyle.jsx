@@ -5,17 +5,26 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import { Button, Container, makeStyles, Typography } from "@material-ui/core";
+import {
+  Button,
+  Container,
+  Divider,
+  makeStyles,
+  Paper,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { getQuestions } from "../lib/api";
 import { postSurvey } from "../lib/api";
+import NavbarFull from "./../Components/NavbarFull";
+import TableContainer from "@material-ui/core/TableContainer";
 
 const useStyles = makeStyles(() => ({
   container: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    borderRadius: "20px",
+    padding: "20px",
+    width: "95%",
   },
   heading: {
     marginBottom: "20px",
@@ -24,10 +33,11 @@ const useStyles = makeStyles(() => ({
     color: "#000",
     fontSize: "18px",
     fontWeight: "500",
-    marginBottom: "10px",
+    margin: "10px",
+    paddingTop: "20px",
   },
   formGroup: {
-    marginBottom: "20px",
+    marginBottom: "10px",
   },
 }));
 
@@ -52,28 +62,32 @@ function Question({ question, register }) {
   const classes = useStyles();
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel className={classes.title} component="legend">
-        {question.question}
-      </FormLabel>
-      <RadioGroup
-        inputRef={register({ required: true })}
-        row
-        aria-label="position"
-        className={classes.formGroup}
-        name={question._id}
-      >
-        {question.options &&
-          question.options.map((option) => (
-            <Option
-              key={question._id + "_" + option._id}
-              option={option}
-              register={register}
-              name={question._id}
-            />
-          ))}
-      </RadioGroup>
-    </FormControl>
+    <>
+      <Divider />
+
+      <FormControl component="fieldset">
+        <FormLabel className={classes.title} component="legend">
+          {question.question}
+        </FormLabel>
+        <RadioGroup
+          inputRef={register({ required: true })}
+          row
+          aria-label="position"
+          className={classes.formGroup}
+          name={question._id}
+        >
+          {question.options &&
+            question.options.map((option) => (
+              <Option
+                key={question._id + "_" + option._id}
+                option={option}
+                register={register}
+                name={question._id}
+              />
+            ))}
+        </RadioGroup>
+      </FormControl>
+    </>
   );
 }
 
@@ -99,23 +113,32 @@ export default function FormControlLabelPlacement(props) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.container} maxWidth="md">
-      <Typography className={classes.heading} variant="h2">
-        Survey
-      </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        {questions &&
-          questions.map((question) => (
-            <Question
-              key={question._id}
-              question={question}
-              register={register}
-            />
-          ))}
-        <Button type="submit" variant="contained" color="primary">
-          SUBMIT
-        </Button>
-      </form>
-    </Container>
+    <div className="dash">
+      <NavbarFull />
+      <Container className={classes.container} maxWidth="md">
+        <Paper className={classes.root}>
+          <TableContainer className={classes.container}>
+            <Toolbar className={classes.toolbar}>
+              <Typography variant="h3" id="tableTitle" component="h1">
+                Survey
+              </Typography>
+            </Toolbar>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {questions &&
+                questions.map((question) => (
+                  <Question
+                    key={question._id}
+                    question={question}
+                    register={register}
+                  />
+                ))}
+              <Button type="submit" variant="contained" color="primary">
+                SUBMIT
+              </Button>
+            </form>
+          </TableContainer>
+        </Paper>
+      </Container>
+    </div>
   );
 }
