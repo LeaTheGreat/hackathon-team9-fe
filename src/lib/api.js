@@ -65,9 +65,9 @@ const getArticleById = async (id) => {
   }
 };
 
-const getChildrenRelatedToParent = async (id) => {
+const getChildrenRelatedToParent = async (perantId) => {
   try {
-    const response = await axios.get(baseUrl + `/api/child/${id}`);
+    const response = await axios.get(baseUrl + `/api/child/parent/${perantId}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -83,6 +83,15 @@ const addNewChild = async (child) => {
   }
 }
 
+const deleteChild = async (id) => {
+  try {
+    const response = await axios.delete(baseUrl + `/api/child/${id}`);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export {
   singup,
   login,
@@ -92,5 +101,6 @@ export {
   getArticles,
   getArticleById,
   addNewChild,
+  deleteChild,
   getChildrenRelatedToParent
 };
